@@ -22,7 +22,7 @@ pipeline {
         }
         stage('Deliver') { 
             steps {
-                bat 'PyInstaller --onefile sources/add2vals.py' 
+                bat 'python -m PyInstaller --onefile sources/add2vals.py' 
             }
             post {
                 success {
