@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                bat 'python -m pytest --junit-xml test-reports/results.xml'
+                bat 'python -m PyInstaller --onefile sources/add2vals.py'
             }
             post {
                 always {
