@@ -23,7 +23,7 @@ pipeline {
         }
        stage('Deliver') {
            steps {
-             bat 'python -m PyInstaller --onefile --windowed --icon=icon.ico --name=MonApp sources/add2vals.py'
+             bat 'python -m PyInstaller --onefile --windowed sources/add2vals.py'
                  }
             post {
               success {
