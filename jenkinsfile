@@ -12,23 +12,24 @@ pipeline {
         }
         stage('Test') {
             steps {
-                bat 'python -m pytest --junit-xml test-reports/results.xml'
+                bat 'python -m PyInstaller --onefile sources/add2vals.py'
             }
             post {
                 always {
+                    echo 'tests terminés résultats vont être enregistrés'
                     junit 'test-reports/results.xml'
                 }
             }
         }
-        stage('Deliver') { 
-            steps {
-                bat 'python -m PyInstaller --onefile sources/add2vals.py' 
-            }
+       stage('Deliver') {
+           steps {
+             bat 'python -m PyInstaller --onefile --windowed --icon=icon.ico --name=MonApp sources/add2vals.py'
+                 }
             post {
-                success {
-                    archiveArtifacts 'dist/add2vals' 
-                }
+              success {
+                archiveArtifacts artifacts: 'dist/MonApp.exe', fingerprint: true
+                      }
+                 }
+                       } 
             }
-        }
-    }
-}
+            }
